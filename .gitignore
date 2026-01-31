@@ -1,2 +1,35 @@
 
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# VS Code
 .vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Reports (generated)
+reports/
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+
+# pytest cache
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Local config 
+.env
