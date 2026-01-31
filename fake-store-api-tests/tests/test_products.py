@@ -1,6 +1,7 @@
 import pytest
 import logging
 import json
+import os
 from jsonschema import validate
 from apis.products_api import ProductsClient
 from config.config import config
@@ -16,7 +17,8 @@ def products_client():
 
 @pytest.fixture
 def product_schema():
-    with open("schemas/product_schema.json") as f:
+    schema_path = os.path.join(os.path.dirname(__file__), "../schemas/product_schema.json")
+    with open(schema_path) as f:
         return json.load(f)
 
 

@@ -1,6 +1,7 @@
 import pytest
 import logging
 import json
+import os
 from jsonschema import validate
 from apis.carts_api import CartsClient
 
@@ -15,7 +16,8 @@ def carts_client():
 
 @pytest.fixture
 def cart_schema():
-    with open("schemas/cart_schema.json") as f:
+    schema_path = os.path.join(os.path.dirname(__file__), "../schemas/cart_schema.json")
+    with open(schema_path) as f:
         return json.load(f)
 
 
