@@ -107,7 +107,7 @@ fake-store-api-tests/
 
 ## Test Count
 
-* Total automated tests: 39
+* Total automated tests: 41
 
 ---
 

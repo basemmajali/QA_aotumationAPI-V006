@@ -26,6 +26,8 @@ The test cases include:
 | AUTH-02 | Login with invalid username  | POST /auth/login | Invalid username            | Status 401                 |
 | AUTH-03 | Login with invalid password  | POST /auth/login | Invalid password            | Status 401                 |
 | AUTH-04 | Login with empty credentials | POST /auth/login | Empty username and password | Status 400 or 401          |
+| AUTH-04 | Login with empty credentials | POST /auth/login | Empty username and password | Status 400 or 401          |
+| AUTH-06 | Login with very long username| POST /auth/login | Username > 100 characters   | Status 400 or validation error |
 | AUTH-05 | Login without request body   | POST /auth/login | No payload                  | Status 400                 |
 | AUTH-06 | Login with long username     | POST /auth/login | Very long username          | Status 400 or 401          |
 
