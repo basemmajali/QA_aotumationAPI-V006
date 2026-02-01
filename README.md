@@ -84,7 +84,6 @@ fake-store-api-tests/
 ├── tests/               # Test cases
 │   ├── test_auth.py
 │   ├── test_products.py
-│   ├── test_products_negative.py
 │   ├── test_carts.py
 │   └── test_carts_edge.py
 ├── schemas/             # JSON schemas
