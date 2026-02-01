@@ -24,7 +24,6 @@ def test_valid_login(auth_client):
 @pytest.mark.auth
 def test_login_without_body(auth_client):
     response = auth_client.login(None,None)
-    print(response.status_code)
     assert response.status_code == 400
 
 @pytest.mark.auth
