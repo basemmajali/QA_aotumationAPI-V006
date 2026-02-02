@@ -122,7 +122,15 @@ fake-store-api-tests/
 
 ## Logging
 
-Logs show the request method, endpoint, and status code.
+- **File:** `fake-store-api-tests/logger.py` 
+- **Log file:** `fake-store-api-tests/logs.log` 
+- **What is logged:** HTTP method, endpoint, request payload (when present), response status code, and response body
+- **How to generate logs:** run the tests (logs are appended automatically):
+
+```bash
+cd fake-store-api-tests
+python -m pytest -q
+```
 
 ---
 

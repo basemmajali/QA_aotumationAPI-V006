@@ -1,8 +1,8 @@
 import requests
-import logging
 from config.config import config
+from logger import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class APIClient:
@@ -15,10 +15,10 @@ class APIClient:
 
     def get(self, endpoint):
         url = f"{self.base_url}{endpoint}"
-        logger.info(f"GET {url}")
+        logger.info(f"HTTP method: GET | Endpoint: {endpoint}")
         try:
             response = requests.get(url, headers=self.headers, timeout=self.timeout)
-            logger.info(f"Status: {response.status_code}")
+            self._log_response("GET", endpoint, None, response)
             return response
         except requests.exceptions.RequestException as e:
             logger.error(f"Request failed: {e}")
@@ -26,12 +26,24 @@ class APIClient:
 
     def post(self, endpoint, json_data=None):
         url = f"{self.base_url}{endpoint}"
-        logger.info(f"POST {url}")
+        logger.info(f"HTTP method: POST | Endpoint: {endpoint} | Payload: {json_data}")
         try:
             response = requests.post(url, json=json_data, headers=self.headers, timeout=self.timeout)
-            logger.info(f"Status: {response.status_code}")
+            self._log_response("POST", endpoint, json_data, response)
             return response
         except requests.exceptions.RequestException as e:
             logger.error(f"Request failed: {e}")
             raise
-            return response
+
+    def _log_response(self, method: str, endpoint: str, payload, response):
+        try:
+            body = response.json()
+        except ValueError:
+            body = response.text
+
+        parts = [f"HTTP method: {method}", f"Endpoint: {endpoint}"]
+        parts.append(f"{method} {endpoint}")
+        parts.append(f"Payload: {payload}")
+        parts.append(f"Status: {response.status_code}")
+        parts.append(f"Body: {body}")
+        logger.info(" | ".join(parts))
