@@ -14,8 +14,9 @@ class APIClient:
         self.timeout = config.REQUEST_TIMEOUT
 
     def get(self, endpoint):
+        """Execute GET request."""
         url = f"{self.base_url}{endpoint}"
-        logger.info(f"HTTP method: GET | Endpoint: {endpoint}")
+        logger.info(f"Request | GET {endpoint}")
         try:
             response = requests.get(url, headers=self.headers, timeout=self.timeout)
             self._log_response("GET", endpoint, None, response)
@@ -25,8 +26,9 @@ class APIClient:
             raise
 
     def post(self, endpoint, json_data=None):
+        """Execute POST request."""
         url = f"{self.base_url}{endpoint}"
-        logger.info(f"HTTP method: POST | Endpoint: {endpoint} | Payload: {json_data}")
+        logger.info(f"Request | POST {endpoint} | Payload: {json_data}")
         try:
             response = requests.post(url, json=json_data, headers=self.headers, timeout=self.timeout)
             self._log_response("POST", endpoint, json_data, response)
@@ -36,14 +38,15 @@ class APIClient:
             raise
 
     def _log_response(self, method: str, endpoint: str, payload, response):
+        """Log the response details."""
         try:
             body = response.json()
         except ValueError:
             body = response.text
 
-        parts = [f"HTTP method: {method}", f"Endpoint: {endpoint}"]
-        parts.append(f"{method} {endpoint}")
-        parts.append(f"Payload: {payload}")
-        parts.append(f"Status: {response.status_code}")
-        parts.append(f"Body: {body}")
-        logger.info(" | ".join(parts))
+        logger.info(
+            f"Response | {method} {endpoint} | "
+            f"Status: {response.status_code} | "
+            f"Payload: {payload} | "
+            f"Body: {body}"
+        )
