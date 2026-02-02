@@ -14,7 +14,6 @@ class APIClient:
         self.timeout = config.REQUEST_TIMEOUT
 
     def get(self, endpoint):
-        """Execute GET request."""
         url = f"{self.base_url}{endpoint}"
         logger.info(f"Request | GET {endpoint}")
         try:
@@ -26,7 +25,6 @@ class APIClient:
             raise
 
     def post(self, endpoint, json_data=None):
-        """Execute POST request."""
         url = f"{self.base_url}{endpoint}"
         logger.info(f"Request | POST {endpoint} | Payload: {json_data}")
         try:
@@ -38,7 +36,6 @@ class APIClient:
             raise
 
     def _log_response(self, method: str, endpoint: str, payload, response):
-        """Log the response details."""
         try:
             body = response.json()
         except ValueError:
