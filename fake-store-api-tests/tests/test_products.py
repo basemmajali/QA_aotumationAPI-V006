@@ -132,7 +132,7 @@ def test_get_products_with_invalid_limit(products_client):
 @pytest.mark.products
 @pytest.mark.negative
 def test_get_products_with_string_limit(products_client):
-    response = products_client.get("/products?limit=abc")
+    response = products_client.get_products_with_limit("abc")
     assert response.status_code in [200, 400]
 
 
