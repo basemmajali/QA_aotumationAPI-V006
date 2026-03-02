@@ -1,13 +1,11 @@
 import logging
+import sys
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.FileHandler("logs.log"),
-        logging.StreamHandler()
-    ]
-)
+# Configure logging to file
+handler = logging.FileHandler("logs.log")
+handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+logging.root.addHandler(handler)
+logging.root.setLevel(logging.INFO)
 
 def get_logger(name: str = __name__):
     return logging.getLogger(name)
